@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import "./style.css";
 
 export class Login extends Component {
   render() {
     return (
-      <div>
+      <div className="login">
         <div id="formContent">
           <div className="fadeIn first">
             <img

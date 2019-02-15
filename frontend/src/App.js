@@ -1,15 +1,18 @@
 import React, { Component } from "react";
-import "./App.css";
-import { Header } from "./components/header.js";
-import { Login } from "./components/login.js";
+import Header from "./components/header";
+import Login from "./components/login";
 import Signup from "./components/signup";
+import Organisations from "./components/organisations";
+import Shifts from "./components/shifts";
 
 class App extends Component {
   render() {
     return (
       <div className="container">
         <Header />
-        <Signup />
+        {/* <Signup /> */}
+        {/* <Organisations /> */}
+        <Shifts />
       </div>
     );
   }

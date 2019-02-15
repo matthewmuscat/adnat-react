@@ -22,12 +22,31 @@ a:hover {
 
 h2 {
   text-align: center;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 600;
   text-transform: uppercase;
   display: inline-block;
-  margin: 40px 8px 10px 8px;
-  color: #cccccc;
+  /* margin: 40px 8px 10px 8px; */
+  color: #92badd;
+}
+
+/* SHIFTS */
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+/* ORGANISATIONS */
+.body-content p {
+  text-align: center;
 }
 
 /* HEADER */
@@ -42,8 +61,7 @@ h2 {
   text-decoration: none !important;
 }
 
-/* LOGIN FORM */
-/* STRUCTURE */
+/* LOGIN  */
 
 .wrapper {
   display: flex;
