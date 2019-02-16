@@ -13,7 +13,11 @@ export class Signup extends Component {
             />
           </div>
 
-          <form>
+          <form
+            action="/auth/signup"
+            method="post"
+            onSubmit={this.props.requestSignup}
+          >
             <input
               type="text"
               id="name"
@@ -37,9 +41,9 @@ export class Signup extends Component {
             />
             <input
               type="text"
-              id="confirmPassword"
+              id="passwordConfirmation"
               className="fadeIn third"
-              name="confirmPassword"
+              name="passwordConfirmation"
               placeholder="Confirm Password"
             />
             <input type="submit" className="fadeIn fourth" value="Sign Up" />

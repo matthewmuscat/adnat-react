@@ -13,7 +13,11 @@ export class Login extends Component {
             />
           </div>
 
-          <form>
+          <form
+            onSubmit={this.props.requestLogin}
+            action="/auth/login"
+            method="post"
+          >
             <input
               type="text"
               id="email"

@@ -5,5 +5,8 @@
   "scripts": {
     "backend:start": "cd backend && node index.js",
     "backend:setup": "cd backend && yarn install"
+  },
+  "dependencies": {
+    "axios": "^0.18.0"
   }
 }
