@@ -14,8 +14,11 @@ Your solution should compile to a single HTML page, and a bundled JS file, you c
 
 # Instructions
 Windows
-1. Install concurrently: `pip install concurrently` or `npm install -g concurrently`
-2. Install [Yarn](https://yarnpkg.com/lang/en/docs/install/#windows-stable)
-2. `cd adnat-react`
-3. Run `yarn backend:setup`
-3. Launch application concurrently with: `concurrently "yarn backend:setup && yarn backend:start" "cd frontend && npm start"`
+1. Execute `chrome.exe --user-data-dir="C:/Chrome dev session" --disable-web-security` for 'Access-Control-Allow-Origin' (cross domain requests). Use this Chrome instance for testing purposes.
+2. Install concurrently: `pip install concurrently` or `npm install -g concurrently`
+3. Install [Yarn](https://yarnpkg.com/lang/en/docs/install/#windows-stable)
+4. `cd adnat-react`
+5. Run `yarn backend:setup`
+6. Install node_modules: `cd frontend && npm install`
+7. Go to parent directory `cd ..` (/adnat-react)
+8. Launch application concurrently with: `concurrently "yarn backend:setup && yarn backend:start" "cd frontend && npm start"`
