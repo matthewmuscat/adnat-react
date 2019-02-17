@@ -14,6 +14,7 @@ Your solution should compile to a single HTML page, and a bundled JS file, you c
 
 # Instructions
 Windows
+1. Download [fix](https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en) for 'Access-Control-Allow-Origin' (cross domain requests)
 1. Install concurrently: `pip install concurrently` or `npm install -g concurrently`
 2. Install [Yarn](https://yarnpkg.com/lang/en/docs/install/#windows-stable)
 2. `cd adnat-react`
