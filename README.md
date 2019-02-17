@@ -18,4 +18,6 @@ Windows
 2. Install [Yarn](https://yarnpkg.com/lang/en/docs/install/#windows-stable)
 2. `cd adnat-react`
 3. Run `yarn backend:setup`
+4. Install node_modules: `cd frontend && npm install`
+5. Go to parent directory `cd ..` (/adnat-react)
 3. Launch application concurrently with: `concurrently "yarn backend:setup && yarn backend:start" "cd frontend && npm start"`
