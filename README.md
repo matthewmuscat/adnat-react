@@ -13,4 +13,6 @@ Please read the [endpoint documentation](https://github.com/TandaHQ/work-samples
 Your solution should compile to a single HTML page, and a bundled JS file, you can use any build tools you’d like. [Webpack](https://webpack.js.org/) is not a bad choice.
 
 # Instructions
-Launch application with: `concurrently "yarn backend:setup && yarn backend:start" "cd frontend && npm start"`
+1. Install concurrently: `pip install concurrently`
+2. `cd adnat-react`
+3. Launch application concurrently with: `concurrently "yarn backend:setup && yarn backend:start" "cd frontend && npm start"`
