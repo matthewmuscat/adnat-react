@@ -42,11 +42,11 @@ export class Login extends Component {
           </form>
 
           <div id="formFooter">
-            <a className="underlineHover" href="#">
+            <a className="underlineHover">
               Forgot Password?
             </a>
             <br />
-            <a className="underlineHover" href="#">
+            <a onClick={this.props.handleSignUpButton} className="underlineHover">
               Sign Up
             </a>
           </div>

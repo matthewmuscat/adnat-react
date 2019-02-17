@@ -110,6 +110,10 @@ class App extends Component {
     });
     return this.state.name;
   }
+
+  handleSignUpButton() {
+    console.log("pressed");
+  }
  
 
   render() {
@@ -129,7 +133,7 @@ class App extends Component {
       return (
         <div className="container">
           <Header requestLogout={this.requestLogout} />
-          <Login requestLogin={this.requestLogin} />
+          <Login handleSignUpButton={this.handleSignUpButton} requestLogin={this.requestLogin} />
           {/* <Signup requestSignup={this.requestSignup} /> */}
         </div>
       );
