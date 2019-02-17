@@ -11,7 +11,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: false,
       sessionId: "",
       name: ""
     };
@@ -32,15 +31,13 @@ class App extends Component {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
     }).then(response => {
       if (response.ok) {
         response.json().then(json => {
           this.setState({
-            loggedIn: true,
             sessionId: json.sessionId
           });
         });
@@ -63,15 +60,13 @@ class App extends Component {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
     }).then(response => {
       if (response.ok) {
         response.json().then(json => {
           this.setState({
-            loggedIn: true,
             sessionId: json.sessionId
           });
         });
@@ -87,15 +82,15 @@ class App extends Component {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+        Authorization: this.state.sessionId
       }
     }).then(
       this.setState({
-        loggedIn: false,
-        sessionId: ""
+        sessionId: "",
+        name: ""
       })
     );
-  } // setstate logged in to false
+  } 
 
   getName() {
     fetch("http://localhost:3000/users/me/", {
@@ -103,30 +98,29 @@ class App extends Component {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+        Authorization: this.state.sessionId
       }
     }).then(response => {
       response.json().then(json => {
-        console.log(json);
         this.setState({
           name: json.name
         });
+        
       });
     });
+    return this.state.name;
   }
+ 
 
   render() {
-    const { loggedIn } = this.state;
-
-    if (loggedIn) {
-      console.log(this.state.sessionId);
-      // console.log(name);
+    const { sessionId } = this.state;
+    if (sessionId) {
       return (
         <div className="container">
           <Header
-            loggedIn={loggedIn}
             getName={this.getName}
             requestLogout={this.requestLogout}
+            sessionId = {sessionId}
           />
           <Organisations />
         </div>
