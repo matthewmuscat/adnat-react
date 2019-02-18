@@ -50,7 +50,7 @@ export class Signup extends Component {
           </form>
 
           <div id="formFooter">
-            <a className="underlineHover">
+            <a onClick={this.props.handleSignUpButton} className="underlineHover">
               Sign In
             </a>
           </div>

@@ -12,12 +12,17 @@ class App extends Component {
     super(props);
     this.state = {
       sessionId: "",
-      name: ""
+      name: "",
+      showSignUpComponent: false,
+      organisations: []
     };
     this.requestLogin = this.requestLogin.bind(this);
     this.requestSignup = this.requestSignup.bind(this);
     this.requestLogout = this.requestLogout.bind(this);
     this.getName = this.getName.bind(this);
+    this.handleSignUpButton = this.handleSignUpButton.bind(this);
+    this.getOrganisations = this.getOrganisations.bind(this);
+    this.createOrganisation = this.createOrganisation.bind(this);
   }
 
   requestLogin(e) {
@@ -111,11 +116,73 @@ class App extends Component {
     return this.state.name;
   }
 
+  getOrganisations() {
+    fetch("http://localhost:3000/organisations", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: this.state.sessionId
+      }
+    }).then(response => {
+      response.json().then(json => {
+        this.setState({
+          organisations: [json.name]
+        });
+        // console.log(json);
+      });
+    });
+  }
+
+  createOrganisation(e) {
+    e.preventDefault();
+    var data = {
+      name: e.target.elements.name.value,
+      hourlyRate: e.target.elements.hourlyRate.value
+    };
+
+    fetch("http://localhost:3000/organisations/create_join", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: this.state.sessionId
+      },
+      body: JSON.stringify(data)
+    })
+  }
+
+  getShifts(e) {
+
+  }
+
+  createShift(e) {
+    e.preventDefault();
+    var data = {
+      shiftDate: e.target.elements.shiftDate.value,
+      start: e.target.elements.start.value,
+      finish: e.target.elements.finish.value,
+      breakLength: e.target.elements.hourlyRate.value
+    };
+
+    fetch("http://localhost:3000/shifts", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: this.state.sessionId
+      },
+      body: JSON.stringify(data)
+    })
+  }
+
+
   handleSignUpButton() {
-    console.log("pressed");
+    this.setState(prevState =>({
+      showSignUpComponent: !prevState.showSignUpComponent,
+    }));
   }
  
-
   render() {
     const { sessionId } = this.state;
     if (sessionId) {
@@ -126,15 +193,19 @@ class App extends Component {
             requestLogout={this.requestLogout}
             sessionId = {sessionId}
           />
-          <Organisations />
+          {/* <Organisations 
+            getOrganisations={this.getOrganisations} 
+            createOrganisation={this.createOrganisation} /> */}
+          <Shifts/>
         </div>
       );
     } else {
       return (
         <div className="container">
           <Header requestLogout={this.requestLogout} />
-          <Login handleSignUpButton={this.handleSignUpButton} requestLogin={this.requestLogin} />
-          {/* <Signup requestSignup={this.requestSignup} /> */}
+          {this.state.showSignUpComponent ?
+           <Signup handleSignUpButton={this.handleSignUpButton} requestSignup={this.requestSignup} /> : <Login handleSignUpButton={this.handleSignUpButton} requestLogin={this.requestLogin} />
+          }
         </div>
       );
     }

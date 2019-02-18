@@ -41,22 +41,24 @@ export class Shifts extends Component {
             </tr>
 
             <tr>
-              <td>Your Username</td>
-              <td>
-                <input type="text" name="name" />
-              </td>
-              <td>
-                <input type="text" name="name" />
-              </td>
-              <td>
-                <input type="text" name="name" />
-              </td>
-              <td>
-                <input type="number" name="name" />
-              </td>
-              <td colSpan="2">
-                <input type="submit" value="Create Shift" />
-              </td>
+              <form action="/shifts" method="post" onSubmit={this.props.createShift}>
+                <td>Your Username</td>
+                <td>
+                  <input type="text" name="shiftDate" />
+                </td>
+                <td>
+                  <input type="text" name="start" />
+                </td>
+                <td>
+                  <input type="text" name="finish" />
+                </td>
+                <td>
+                  <input type="number" name="breakLength" />
+                </td>
+                <td colSpan="2">
+                  <input type="submit" value="Create Shift" />
+                </td>
+              </form>
             </tr>
           </tbody>
         </table>
