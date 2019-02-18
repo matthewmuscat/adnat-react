@@ -7,6 +7,7 @@
     "backend:setup": "cd backend && yarn install"
   },
   "dependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.18.0",
+    "cors": "^2.8.5"
   }
 }
