@@ -14,7 +14,7 @@ Your solution should compile to a single HTML page, and a bundled JS file, you c
 
 # Instructions
 Windows
-1. Execute `chrome.exe --user-data-dir="C:/Chrome dev session" --disable-web-security` for 'Access-Control-Allow-Origin' (cross domain requests). Use this Chrome instance for testing purposes.
+1. Install cors: `npm install cors` to allow for 'Access-Control-Allow-Origin' (cross domain requests). 
 2. Install concurrently: `pip install concurrently` or `npm install -g concurrently`
 3. Install [Yarn](https://yarnpkg.com/lang/en/docs/install/#windows-stable)
 4. `cd adnat-react`
