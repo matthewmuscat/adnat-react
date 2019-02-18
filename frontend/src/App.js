@@ -13,6 +13,8 @@ class App extends Component {
     this.state = {
       sessionId: "",
       name: "",
+      userId: "",
+      email: "",
       showSignUpComponent: false,
       organisations: []
     };
@@ -92,11 +94,15 @@ class App extends Component {
     }).then(
       this.setState({
         sessionId: "",
-        name: ""
+        name: "",
+        email: "",
+        organisations: [],
+        userId: ""
       })
     );
   } 
 
+  // get account data
   getName() {
     fetch("http://localhost:3000/users/me/", {
       method: "GET",
@@ -108,7 +114,9 @@ class App extends Component {
     }).then(response => {
       response.json().then(json => {
         this.setState({
-          name: json.name
+          name: json.name,
+          userId: json.id,
+          email: json.email,
         });
         
       });
@@ -159,6 +167,7 @@ class App extends Component {
   createShift(e) {
     e.preventDefault();
     var data = {
+      // user id
       shiftDate: e.target.elements.shiftDate.value,
       start: e.target.elements.start.value,
       finish: e.target.elements.finish.value,

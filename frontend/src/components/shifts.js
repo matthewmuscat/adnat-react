@@ -8,6 +8,7 @@ export class Shifts extends Component {
         <br />
         <br />
         <p>Shifts</p>
+        <form action="/shifts" method="post" onSubmit={this.props.createShift}>
         <table>
           <thead>
             <tr>
@@ -41,7 +42,7 @@ export class Shifts extends Component {
             </tr>
 
             <tr>
-              <form action="/shifts" method="post" onSubmit={this.props.createShift}>
+              
                 <td>Your Username</td>
                 <td>
                   <input type="text" name="shiftDate" />
@@ -53,15 +54,16 @@ export class Shifts extends Component {
                   <input type="text" name="finish" />
                 </td>
                 <td>
-                  <input type="number" name="breakLength" />
+                  <input type="text" name="breakLength" />
                 </td>
                 <td colSpan="2">
                   <input type="submit" value="Create Shift" />
                 </td>
-              </form>
+              
             </tr>
           </tbody>
         </table>
+        </form>
       </div>
     );
   }
