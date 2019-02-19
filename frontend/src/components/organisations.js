@@ -1,6 +1,28 @@
 import React, { Component } from "react";
 
 export class Organisations extends Component {
+  componentDidMount() {
+    this.props.getOrganisations();
+  }
+
+  displayOrganisations() {
+    var organisations = this.props.organisations;
+    var organisation = organisations.map(organisation => (
+      <li key={organisation.id}>
+        {organisation.name}
+        <button onClick={() => this.setState({ editing: true })}>Edit</button>
+        <button
+          onClick={() =>
+            this.props.joinOrganisation(organisation.id, organisation.name)
+          }
+        >
+          Join
+        </button>
+      </li>
+    ));
+    return <ul>{organisation}</ul>;
+  }
+
   render() {
     return (
       <div className="body-content">
@@ -11,16 +33,13 @@ export class Organisations extends Component {
         </p>
         <br />
         <h2>Organisations</h2>
-        <ul>
-          {/* loop li's */}
-          <p onLoad={this.props.getOrganisations}></p>
-          <li>Bob's Burgers</li>
-          <li>Moe's Tavern</li>
-          <li>Sally's Sandwiches</li>
-        </ul>
-        <form action="/organisations/create_join"
-            method="post"
-            onSubmit={this.props.createOrganisation}>
+        {this.displayOrganisations()}
+
+        <form
+          action="/organisations/create_join"
+          method="post"
+          onSubmit={this.props.createOrganisation}
+        >
           <h2>Create Organisation</h2>
           <br />
           Name <input type="text" id="name" name="name" />

@@ -11,9 +11,7 @@ export class Header extends Component {
             <h1>Adnat</h1>
           </a>
           <p>Logged in as {this.props.getName()}</p>
-          <a onClick={this.props.requestLogout}>
-            Log Out
-          </a>
+          <button onClick={this.props.requestLogout}>Log Out</button>
         </div>
       );
     } else {
