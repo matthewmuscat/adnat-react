@@ -10,7 +10,7 @@ export class Organisations extends Component {
     var organisation = organisations.map(organisation => (
       <li key={organisation.id}>
         {organisation.name}
-        <button onClick={() => this.setState({ editing: true })}>Edit</button>
+        {/* <button onClick={() => this.setState({ editing: true })}>Edit</button> */}
         <button
           onClick={() =>
             this.props.joinOrganisation(organisation.id, organisation.name)
@@ -26,11 +26,15 @@ export class Organisations extends Component {
   render() {
     return (
       <div className="body-content">
-        {/* { if no organisations} */}
-        <p>
-          You aren't a member of any organisations. Join an existing one or
-          create a new one.
-        </p>
+        {this.props.organisationId ? (
+          <p />
+        ) : (
+          <p>
+            You aren't a member of any organisations. Join an existing one or
+            create a new one.
+          </p>
+        )}
+
         <br />
         <h2>Organisations</h2>
         {this.displayOrganisations()}

@@ -210,20 +210,19 @@ class App extends Component {
       hourlyRate: e.target.elements.hourlyRate.value
     };
 
-    var fetch =
+    fetch(
       "http://localhost:3000/organisations/" +
-      this.state.organisationId.toString();
-    console.log(fetch);
-
-    fetch("http://localhost:3000/organisations/:id", {
-      method: "PUT",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: this.state.sessionId
-      },
-      body: JSON.stringify(data)
-    });
+        this.state.organisationId.toString(),
+      {
+        method: "PUT",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: this.state.sessionId
+        },
+        body: JSON.stringify(data)
+      }
+    );
     // update dom
     this.setState({
       organisationName: data.name,
@@ -315,6 +314,7 @@ class App extends Component {
               createOrganisation={this.createOrganisation}
               joinOrganisation={this.joinOrganisation}
               organisations={this.state.organisations}
+              organisationId={this.state.organisationId}
             />
           )}
         </div>
