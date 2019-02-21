@@ -1,6 +1,26 @@
 import React, { Component } from "react";
 
 export class Shifts extends Component {
+  componentDidMount() {
+    this.getShifts();
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: "",
+      start: "",
+      finish: "",
+      breakLength: ""
+    };
+  }
+
+  createTable() {}
+
+  createShift() {}
+
+  getShifts() {}
+
   render() {
     return (
       <div>
@@ -9,40 +29,30 @@ export class Shifts extends Component {
         <br />
         <p>Shifts</p>
         <form action="/shifts" method="post" onSubmit={this.props.createShift}>
-        <table>
-          <thead>
-            <tr>
-              <th>Employee Name</th>
-              <th>Shift date</th>
-              <th>Start time</th>
-              <th>Finish time</th>
-              <th>Break length (mins)</th>
-              <th>Hours worked</th>
-              <th>Shift cost</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Alfreds Futterkiste</td>
-              <td>Maria Anders</td>
-              <td>Germany</td>
-              <td>Alfreds Futterkiste</td>
-              <td>Maria Anders</td>
-              <td>Germany</td>
-              <td>Germany</td>
-            </tr>
-            <tr>
-              <td>Alfreds Futterkiste</td>
-              <td>Maria Anders</td>
-              <td>Germany</td>
-              <td>Alfreds Futterkiste</td>
-              <td>Maria Anders</td>
-              <td>Germany</td>
-              <td>Germany</td>
-            </tr>
+          <table>
+            <thead>
+              <tr>
+                <th>Employee Name</th>
+                <th>Shift date</th>
+                <th>Start time</th>
+                <th>Finish time</th>
+                <th>Break length (mins)</th>
+                <th>Hours worked</th>
+                <th>Shift cost</th>
+              </tr>
+            </thead>
+            <tbody>{this.createTable()}</tbody>
+          </table>
+        </form>
+      </div>
+    );
+  }
+}
 
-            <tr>
-              
+export default Shifts;
+
+{
+  /* <tr>
                 <td>Your Username</td>
                 <td>
                   <input type="text" name="shiftDate" />
@@ -59,14 +69,5 @@ export class Shifts extends Component {
                 <td colSpan="2">
                   <input type="submit" value="Create Shift" />
                 </td>
-              
-            </tr>
-          </tbody>
-        </table>
-        </form>
-      </div>
-    );
-  }
+              </tr> */
 }
-
-export default Shifts;
