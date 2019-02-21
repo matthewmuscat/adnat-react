@@ -14,11 +14,12 @@ Your solution should compile to a single HTML page, and a bundled JS file, you c
 
 # Instructions
 Windows
-1. Install cors: `npm install cors` to allow for 'Access-Control-Allow-Origin' (cross domain requests). Also install 'react-router-dom' : `npm i react-router-dom --save` 
-2. Install concurrently: `pip install concurrently` or `npm install -g concurrently`
-3. Install [Yarn](https://yarnpkg.com/lang/en/docs/install/#windows-stable)
-4. `cd adnat-react`
-5. Run `yarn backend:setup`
-6. Install node_modules: `cd frontend && npm install`
-7. Go to parent directory `cd ..` (/adnat-react)
-8. Launch application concurrently with: `concurrently "yarn backend:setup && yarn backend:start" "cd frontend && npm start"`
+1. Install cors: `npm install cors` to allow for 'Access-Control-Allow-Origin' (cross domain requests). 
+2. Install 'react-router-dom': `npm i react-router-dom --save` 
+3. Install concurrently: `pip install concurrently` or `npm install -g concurrently`
+4. Install [Yarn](https://yarnpkg.com/lang/en/docs/install/#windows-stable)
+5. `cd adnat-react`
+6. Run `yarn backend:setup`
+7. Install node_modules: `cd frontend && npm install`
+8. Go to parent directory `cd ..` (/adnat-react)
+9. Launch application concurrently with: `concurrently "yarn backend:setup && yarn backend:start" "cd frontend && npm start"`
