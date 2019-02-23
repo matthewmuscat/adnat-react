@@ -148,7 +148,7 @@ input[type="reset"] {
   -ms-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-  width: 85%;
+  width: 80%;
 }
 
 input[type="button"]:hover,

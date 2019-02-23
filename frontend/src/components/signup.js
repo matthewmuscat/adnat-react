@@ -4,16 +4,15 @@ export class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: undefined,
-      email: undefined,
-      password: undefined,
-      passwordConfirmation: undefined
+      name: '',
+      email: '',
+      password: '',
+      passwordConfirmation: ''
     };
-    this.signup = this.signup.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  signup(e) {
+  // Request signup
+  signup = (e) => {
     e.preventDefault();
     var data = {
       name: this.state.name,
@@ -35,9 +34,7 @@ export class Signup extends Component {
       .then(response => {
         if (response.ok) {
           response.json().then(json => {
-            this.setState({
-              sessionId: json.sessionId
-            });
+            this.props.callbackSessionId(json.sessionId);
           });
         } else {
           console.log("Sign Up Failed");
@@ -48,7 +45,8 @@ export class Signup extends Component {
       });
   }
 
-  handleChange = ({ target }) => {
+  // Handle text input on change
+  handleTextInput = ({ target }) => {
     this.setState({
       [target.name]: target.value
     });
@@ -74,7 +72,7 @@ export class Signup extends Component {
               name="name"
               placeholder="Name"
               value={this.state.name}
-              onChange={this.handleChange}
+              onChange={this.handleTextInput}
             />
             <input
               type="text"
@@ -83,7 +81,7 @@ export class Signup extends Component {
               name="email"
               placeholder="Email"
               value={this.state.email}
-              onChange={this.handleChange}
+              onChange={this.handleTextInput}
             />
             <input
               type="text"
@@ -92,7 +90,7 @@ export class Signup extends Component {
               name="password"
               placeholder="Password (min. 6)"
               value={this.state.password}
-              onChange={this.handleChange}
+              onChange={this.handleTextInput}
             />
             <input
               type="text"
@@ -101,7 +99,7 @@ export class Signup extends Component {
               name="passwordConfirmation"
               placeholder="Confirm Password"
               value={this.state.passwordConfirmation}
-              onChange={this.handleChange}
+              onChange={this.handleTextInput}
             />
             <br />
             <br />

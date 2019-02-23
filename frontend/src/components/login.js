@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Signup from "./SignUp";
+import SignUp from "./SignUp";
 
 export class Login extends Component {
   constructor(props) {
@@ -8,11 +8,10 @@ export class Login extends Component {
       email: "",
       password: ""
     };
-    this.login = this.login.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  login(e) {
+  // Request login
+  login = (e) => {
     e.preventDefault();
     var data = {
       email: this.state.email,
@@ -31,7 +30,6 @@ export class Login extends Component {
         if (response.ok) {
           response.json().then(json => {
             this.props.callbackSessionId(json.sessionId);
-            console.log("worked");
           });
         } else {
           console.log("Login Failed");
@@ -42,7 +40,8 @@ export class Login extends Component {
       });
   }
 
-  handleChange = ({ target }) => {
+  // Handle text input on change
+  handleTextInput = ({ target }) => {
     this.setState({
       [target.name]: target.value
     });
@@ -71,7 +70,7 @@ export class Login extends Component {
                   placeholder="Email"
                   required={true}
                   value={this.state.email}
-                  onChange={this.handleChange}
+                  onChange={this.handleTextInput}
                 />
                 <input
                   type="text"
@@ -81,7 +80,7 @@ export class Login extends Component {
                   placeholder="Password"
                   required={true}
                   value={this.state.password}
-                  onChange={this.handleChange}
+                  onChange={this.handleTextInput}
                 />
                 <br />
                 <br />
@@ -105,9 +104,9 @@ export class Login extends Component {
             </div>
           </div>
         ) : (
-          <Signup />
+          <SignUp />
         )}
-        )
+        
       </div>
     );
   }
