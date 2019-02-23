@@ -63,17 +63,6 @@ export class Shifts extends Component {
 
       if (this.props.userAttributes.id === this.props.shifts[i].userId) {
         column.push(
-          <td key={"edit" + i}>
-            <button
-              onClick={() => {
-                this.edit(i);
-              }}
-            >
-              Edit
-            </button>
-          </td>
-        );
-        column.push(
           <td key={"delete" + i}>
             <button
               onClick={() => {
@@ -104,7 +93,7 @@ export class Shifts extends Component {
       data.breakLength = this.state.breakLength;
     }
 
-    fetch("http://localhost:3000/shifts", {
+    fetch("/shifts/", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -129,7 +118,7 @@ export class Shifts extends Component {
 
   // Request to delete a shift
   deleteShift = (i) => {
-    fetch("http://localhost:3000/shifts/" + this.props.shifts[i].id, {
+    fetch("/shifts/" + this.props.shifts[i].id, {
       method: "DELETE",
       headers: {
         Accept: "application/json",

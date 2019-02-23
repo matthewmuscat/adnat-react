@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export class Header extends Component {
   // Logout call, then request state change
   logout = () => {
-    fetch("http://localhost:3000/auth/logout", {
+    fetch("/auth/logout", {
       method: "DELETE",
       headers: {
         Accept: "application/json",

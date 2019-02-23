@@ -18,7 +18,7 @@ export class Login extends Component {
       password: this.state.password
     };
 
-    fetch("http://localhost:3000/auth/login/", {
+    fetch("/auth/login/", {
       method: "POST",
       headers: {
         Accept: "application/json",

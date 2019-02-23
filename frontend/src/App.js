@@ -30,7 +30,7 @@ class App extends Component {
 
   // Get user attributes
   fetchUserAttributes = (sessionId) => {
-    return fetch("http://localhost:3000/users/me/", {
+    return fetch("/users/me/", {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -106,7 +106,7 @@ class App extends Component {
 
   // Get list of organisations
   getOrganisations = (sessionId) => {
-    return fetch("http://localhost:3000/organisations", {
+    return fetch("/organisations", {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -118,7 +118,7 @@ class App extends Component {
   
   // Get list of shifts
   getShifts = (sessionId) => {
-    return fetch("http://localhost:3000/shifts", {
+    return fetch("/shifts", {
       method: "GET",
       headers: {
         Accept: "application/json",
