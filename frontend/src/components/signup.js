@@ -21,8 +21,6 @@ export class Signup extends Component {
       passwordConfirmation: this.state.passwordConfirmation
     };
 
-    console.log(data);
-
     fetch("http://localhost:3000/auth/signup/", {
       method: "POST",
       headers: {

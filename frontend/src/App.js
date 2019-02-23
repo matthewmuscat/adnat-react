@@ -121,7 +121,6 @@ class App extends Component {
     return fetch("/shifts", {
       method: "GET",
       headers: {
-        Accept: "application/json",
         "Content-Type": "application/json",
         Authorization: sessionId
       }
