@@ -14,13 +14,16 @@ Your solution should compile to a single HTML page, and a bundled JS file, you c
 
 # Instructions
 **Windows** 
+
 1. `git clone https://github.com/matthewmuscat/adnat-react.git`
 2. `cd adnat-react`
+
 **Backend:** 
-1. `yarn backend:setup`
-2. `yarn backend:start`
+3. `yarn backend:setup`
+4. `yarn backend:start`
+
 **Frontend:** 
-1. `cd frontend`
-1. `npm run build`
-2. `npm run serve`
-3. Browse to http://localhost:5000
+5. `cd frontend`
+6. `npm run build`
+7. `npm run serve`
+8. Browse to http://localhost:5000
