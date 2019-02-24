@@ -13,6 +13,7 @@ Please read the [endpoint documentation](https://github.com/TandaHQ/work-samples
 Your solution should compile to a single HTML page, and a bundled JS file, you can use any build tools you’d like. [Webpack](https://webpack.js.org/) is not a bad choice.
 
 # Instructions
+
 *Windows*
 
 1. `git clone https://github.com/matthewmuscat/adnat-react.git`
