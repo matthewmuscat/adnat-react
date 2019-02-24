@@ -203,6 +203,12 @@ export class Organisations extends Component {
                 />
                 <input type="submit" value="Update" />
                 <br />
+                <button
+                  onClick={() => this.setState({ editing: false })}
+                  type="button"
+                >
+                  Back
+                </button>
                 <button onClick={this.leaveOrganisation} type="button">
                   Leave
                 </button>

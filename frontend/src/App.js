@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+  Redirect
+} from "react-router-dom";
 
 // import components
 import Header from "./components/Header";
@@ -161,11 +167,12 @@ class App extends Component {
         <Router>
           <div>
             <Header logout={this.logout} sessionId={this.state.sessionId} />
-            <Switch>
-              {/* If user has pressed 'sign up' */}
-              {this.state.showSignUpComponent ? (
+
+            {/* If user has pressed 'sign up' */}
+            {this.state.showSignUpComponent ? (
+              <Switch>
                 <Route
-                  // path="/register"
+                  path="/signup"
                   render={props => (
                     <SignUp
                       {...props}
@@ -175,9 +182,13 @@ class App extends Component {
                     />
                   )}
                 />
-              ) : (
-                // Otherwise show Login
+                <Redirect to="/signup" />
+              </Switch>
+            ) : (
+              <Switch>
+                {/* // Otherwise show Login */}
                 <Route
+                  path="/login"
                   render={props => (
                     <Login
                       {...props}
@@ -187,8 +198,9 @@ class App extends Component {
                     />
                   )}
                 />
-              )}
-            </Switch>
+                <Redirect to="/login" />
+              </Switch>
+            )}
           </div>
         </Router>
       );
@@ -206,29 +218,42 @@ class App extends Component {
           <div className="container">
             {/* If user is viewing shifts */}
             {this.state.showShifts ? (
-              <Shifts
-                sessionId={this.state.sessionId}
-                userAttributes={this.state.userAttributes}
-                organisations={this.state.organisations}
-                shifts={this.state.shifts}
-                getData={this.fetchData}
-                toggleShift={this.toggleShift}
-              />
+              <Switch>
+                <Route
+                  path="/shifts"
+                  render={props => (
+                    <Shifts
+                      {...props}
+                      sessionId={this.state.sessionId}
+                      userAttributes={this.state.userAttributes}
+                      organisations={this.state.organisations}
+                      shifts={this.state.shifts}
+                      getData={this.fetchData}
+                      toggleShift={this.toggleShift}
+                    />
+                  )}
+                />
+                <Redirect to="/shifts" />
+              </Switch>
             ) : (
               // If not, show organisations
-              <Route
-                render={props => (
-                  <Organisations
-                    {...props}
-                    sessionId={this.state.sessionId}
-                    userAttributes={this.state.userAttributes}
-                    organisations={this.state.organisations}
-                    getData={this.fetchData}
-                    getOrganisations={this.getOrganisations}
-                    toggleShift={this.toggleShift}
-                  />
-                )}
-              />
+              <Switch>
+                <Route
+                  path="/organisations"
+                  render={props => (
+                    <Organisations
+                      {...props}
+                      sessionId={this.state.sessionId}
+                      userAttributes={this.state.userAttributes}
+                      organisations={this.state.organisations}
+                      getData={this.fetchData}
+                      getOrganisations={this.getOrganisations}
+                      toggleShift={this.toggleShift}
+                    />
+                  )}
+                />
+                <Redirect to="/organisations" />
+              </Switch>
             )}
           </div>
         </div>

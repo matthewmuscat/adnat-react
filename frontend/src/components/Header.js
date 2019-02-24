@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 export class Header extends Component {
   // Logout call, then request state change
@@ -20,9 +21,7 @@ export class Header extends Component {
     if (this.props.sessionId) {
       return (
         <div className="header">
-          <a href="./">
-            <h1>Adnat</h1>
-          </a>
+          <h1 style={{ color: "#57baed" }}>Adnat</h1>
           <p>Logged in as {this.props.userAttributes.name}</p>
           <button onClick={this.logout}>Log Out</button>
         </div>
@@ -30,9 +29,7 @@ export class Header extends Component {
     } else {
       return (
         <div className="header">
-          <a href="./">
-            <h1>Adnat</h1>
-          </a>
+          <h1 style={{ color: "#57baed" }}>Adnat</h1>
         </div>
       );
     }
