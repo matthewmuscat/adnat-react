@@ -23,7 +23,7 @@ Your solution should compile to a single HTML page, and a bundled JS file, you c
 3. `yarn backend:setup`
 4. `yarn backend:start`
 
-**Frontend:** 
+**Frontend: (in new console)** 
 
 5. `cd frontend`
 6. `npm run build`
