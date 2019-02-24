@@ -13,20 +13,28 @@ Please read the [endpoint documentation](https://github.com/TandaHQ/work-samples
 Your solution should compile to a single HTML page, and a bundled JS file, you can use any build tools you’d like. [Webpack](https://webpack.js.org/) is not a bad choice.
 
 # Instructions
-
 *Windows*
+
+**Installation:**
 
 1. `git clone https://github.com/matthewmuscat/adnat-react.git`
 2. `cd adnat-react`
+3. `npm install`
+4. `cd frontend`
+5. `npm install`
+6. `cd ../backend`
+7. `npm install`
 
 **Backend:** 
 
-3. `yarn backend:setup`
-4. `yarn backend:start`
+8. Navigate to parent: `cd adnat-react`
+9. `yarn backend:setup`
+10. `yarn backend:start`
 
 **Frontend: (in new console)** 
-5. `cd adnat-react`
-6. `cd frontend`
-7. `npm run build`
-8. `npm run serve`
-9. Browse to http://localhost:5000
+
+11. `cd adnat-react`
+12. `cd frontend`
+13. `npm run build`
+14. `npm run serve`
+15. Browse to http://localhost:5000
