@@ -25,96 +25,117 @@ class App extends Component {
 
   // Logout state handler function
   logout = () => {
-    this.setState({ sessionId: undefined, showShifts: false});
+    this.setState({ sessionId: undefined, showShifts: false });
   };
 
   // Get user attributes
-  fetchUserAttributes = (sessionId) => {
+  fetchUserAttributes = sessionId => {
     return fetch("/users/me/", {
       method: "GET",
       headers: {
-        "Accept": "application/json",
+        Accept: "application/json",
         "Content-Type": "application/json",
-        "Authorization": sessionId
+        Authorization: sessionId
       }
     });
   };
 
   // Callback function to update user attributes, organisations and shifts using updated sessionId
-  callbackSessionId = (sessionId) => {
+  callbackSessionId = sessionId => {
+    // fetch user data
     let promise1 = this.fetchUserAttributes(sessionId)
-        .then(response => response.json())
-        .then(json => this.setState({
-            userAttributes: json
-        }));
-    Promise.all([promise1]).then(() => {
-        let promise2 = this.getOrganisations(sessionId)
-            .then(response => response.json())
-            .then(json => this.setState({
-                organisations: json
-            }));
-        
-            console.log(sessionId);
+      .then(response => response.json())
+      .then(json =>
+        this.setState({
+          userAttributes: json,
+          sessionId: sessionId
+        })
+      );
+
+    // fetch organisations (show when not logged in)
+    let promise2 = this.getOrganisations(sessionId)
+      .then(response => response.json())
+      .then(json =>
+        this.setState({
+          organisations: json
+        })
+      );
+    Promise.all([promise1, promise2]).then(() => {
+      // only get shifts if user has joined an organisation
+      if (this.state.userAttributes.organisationId !== null) {
         let promise3 = this.getShifts(sessionId)
-            .then(response => response.json())
-            .then(json => this.setState({
-                shifts: json
-            }));
-        // this.setState({
-        //     sessionId: sessionId
-        // });
-        Promise.all([promise2, promise3]).then(() => {
+          .then(response => response.json())
+          .then(json =>
             this.setState({
-                sessionId: sessionId
-            });
+              shifts: json
+            })
+          );
+        Promise.all([promise3]).then(() => {
+          this.setState({
+            sessionId: sessionId
+          });
         });
-    });
-};
-
-  // Get initial user attributes, organisations and shift data
-  fetchData = () => {
-    let promise1 = this.fetchUserAttributes(this.state.sessionId)
-        .then(response => response.json())
-        .then(json => this.setState({
-            userAttributes: json
-        }));
-    Promise.all([promise1]).then(() => {
-        let promise2 = this.getOrganisations(this.state.sessionId)
-            .then(response => response.json())
-            .then(json => this.setState({
-                organisations: json
-            }));
-        let promise3 = this.getShifts(this.state.sessionId)
-            .then(response => response.json())
-            .then(json => this.setState({
-                shifts: json
-            }));
-        Promise.all([promise2, promise3]).then(() => {
-            this.forceUpdate();
-        });
-    });
-};
-
-  // Get list of organisations
-  getOrganisations = (sessionId) => {
-    return fetch("/organisations", {
-      method: "GET",
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-        "Authorization": sessionId
       }
     });
   };
-  
+
+  // Get initial user attributes, organisations and shift data
+  fetchData = () => {
+    // fetch user data
+    let promise1 = this.fetchUserAttributes(this.state.sessionId)
+      .then(response => response.json())
+      .then(json =>
+        this.setState({
+          userAttributes: json
+        })
+      );
+
+    // fetch organisations (show when not logged in)
+    let promise2 = this.getOrganisations(this.state.sessionId)
+      .then(response => response.json())
+      .then(json =>
+        this.setState({
+          organisations: json
+        })
+      );
+
+    Promise.all([promise1, promise2]).then(() => {
+      // only get shifts if user has joined an organisation
+      if (this.state.userAttributes.organisationId !== null) {
+        let promise3 = this.getShifts(this.state.sessionId)
+          .then(response => response.json())
+          .then(json =>
+            this.setState({
+              shifts: json
+            })
+          );
+        Promise.all([promise3]).then(() => {
+          this.forceUpdate();
+        });
+      }
+    });
+  };
+
+  // Get list of organisations
+  getOrganisations = sessionId => {
+    return fetch("/organisations", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: sessionId
+      }
+    });
+  };
+
   // Get list of shifts
-  getShifts = (sessionId) => {
+  getShifts = sessionId => {
     return fetch("/shifts", {
       method: "GET",
       headers: {
-        "Accept": "application/json",
+        Accept: "application/json",
         "Content-Type": "application/json",
-        "Authorization": sessionId
+        Authorization: sessionId
       }
     });
   };
@@ -124,14 +145,14 @@ class App extends Component {
     this.setState(prevState => ({
       showSignUpComponent: !prevState.showSignUpComponent
     }));
-  }
+  };
 
   // Handle Shifts view with toggle
   toggleShift = () => {
     this.setState(prevState => ({
       showShifts: !prevState.showShifts
     }));
-  }
+  };
 
   render() {
     // If the user has not logged in yet
@@ -183,7 +204,7 @@ class App extends Component {
             userAttributes={this.state.userAttributes}
           />
           <div className="container">
-          {/* If user is viewing shifts */}
+            {/* If user is viewing shifts */}
             {this.state.showShifts ? (
               <Shifts
                 sessionId={this.state.sessionId}
