@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 export class Header extends Component {
   // Logout call, then request state change
   logout = () => {
-    fetch("/auth/logout", {
+    fetch("http://localhost:3000/auth/logout", {
       method: "DELETE",
       headers: {
         Accept: "application/json",

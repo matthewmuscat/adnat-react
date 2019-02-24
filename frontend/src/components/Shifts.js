@@ -93,7 +93,7 @@ export class Shifts extends Component {
       data.breakLength = this.state.breakLength;
     }
 
-    fetch("/shifts/", {
+    fetch("http://localhost:3000/shifts/", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -118,7 +118,7 @@ export class Shifts extends Component {
 
   // Request to delete a shift
   deleteShift = i => {
-    fetch("/shifts/" + this.props.shifts[i].id, {
+    fetch("http://localhost:3000/shifts/" + this.props.shifts[i].id, {
       method: "DELETE",
       headers: {
         Accept: "application/json",

@@ -21,7 +21,7 @@ export class Signup extends Component {
       passwordConfirmation: this.state.passwordConfirmation
     };
 
-    fetch("/auth/signup/", {
+    fetch("http://localhost:3000/auth/signup/", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -62,7 +62,11 @@ export class Signup extends Component {
             />
           </div>
 
-          <form action="/auth/signup" method="post" onSubmit={this.signup}>
+          <form
+            action="http://localhost:3000/auth/signup"
+            method="post"
+            onSubmit={this.signup}
+          >
             <input
               type="text"
               id="name"

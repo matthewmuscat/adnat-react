@@ -34,7 +34,7 @@ export class Organisations extends Component {
     var data = {
       organisationId: organisationId
     };
-    fetch("/organisations/join", {
+    fetch("http://localhost:3000/organisations/join", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -55,7 +55,7 @@ export class Organisations extends Component {
       hourlyRate: this.state.hourlyRate
     };
 
-    fetch("/organisations/create_join", {
+    fetch("http://localhost:3000/organisations/create_join", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -73,7 +73,7 @@ export class Organisations extends Component {
   };
 
   leaveOrganisation = () => {
-    fetch("/organisations/leave", {
+    fetch("http://localhost:3000/organisations/leave", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -94,7 +94,8 @@ export class Organisations extends Component {
     };
 
     fetch(
-      "/organisations/" + this.props.userAttributes.organisationId.toString(),
+      "http://localhost:3000/organisations/" +
+        this.props.userAttributes.organisationId.toString(),
       {
         method: "PUT",
         headers: {
@@ -142,7 +143,7 @@ export class Organisations extends Component {
           {this.displayOrganisations()}
 
           <form
-            action="/organisations/create_join"
+            action="http://localhost:3000/organisations/create_join"
             method="post"
             onSubmit={this.createOrganisation}
           >
@@ -179,7 +180,10 @@ export class Organisations extends Component {
             <div>
               <h2>Edit {this.state.organisationName}</h2>
               <form
-                action={"/organisations/" + this.state.organisationId}
+                action={
+                  "http://localhost:3000/organisations/" +
+                  this.state.organisationId
+                }
                 method="PUT"
                 onSubmit={this.editOrganisation}
               >

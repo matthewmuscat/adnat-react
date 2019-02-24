@@ -25,7 +25,7 @@ export class Login extends Component {
       password: this.state.password
     };
 
-    fetch("/auth/login/", {
+    fetch("http://localhost:3000/auth/login/", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -68,7 +68,11 @@ export class Login extends Component {
                 />
               </div>
 
-              <form onSubmit={this.login} action="/auth/login" method="post">
+              <form
+                onSubmit={this.login}
+                action="http://localhost:3000/auth/login"
+                method="post"
+              >
                 <input
                   type="text"
                   id="email"
