@@ -14,6 +14,7 @@ Your solution should compile to a single HTML page, and a bundled JS file, you c
 
 # Instructions
 *Windows*
+
 **Installation:**
 
 1. `git clone https://github.com/matthewmuscat/adnat-react.git`
