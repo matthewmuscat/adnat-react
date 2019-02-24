@@ -25,7 +25,8 @@ Your solution should compile to a single HTML page, and a bundled JS file, you c
 
 **Frontend: (in new console)** 
 
-5. `cd frontend`
-6. `npm run build`
-7. `npm run serve`
-8. Browse to http://localhost:5000
+5. `cd adnat-react`
+6. `cd frontend`
+7. `npm run build`
+8. `npm run serve`
+9. Browse to http://localhost:5000
