@@ -21,7 +21,7 @@ export class Login extends Component {
     fetch("/auth/login/", {
       method: "POST",
       headers: {
-        Accept: "application/json",
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
@@ -32,7 +32,7 @@ export class Login extends Component {
             this.props.callbackSessionId(json.sessionId);
           });
         } else {
-          console.log("Login Failed");
+          console.log("Invalid Login Details");
         }
       })
       .catch(res => {

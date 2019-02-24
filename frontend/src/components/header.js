@@ -6,9 +6,9 @@ export class Header extends Component {
     fetch("/auth/logout", {
       method: "DELETE",
       headers: {
-        Accept: "application/json",
+        "Accept": "application/json",
         "Content-Type": "application/json",
-        Authorization: this.props.sessionId
+        "Authorization": this.props.sessionId
       }
     }).then(() => {
       this.props.logout();

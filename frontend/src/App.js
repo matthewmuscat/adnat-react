@@ -33,85 +33,76 @@ class App extends Component {
     return fetch("/users/me/", {
       method: "GET",
       headers: {
-        Accept: "application/json",
+        "Accept": "application/json",
         "Content-Type": "application/json",
-        Authorization: sessionId
+        "Authorization": sessionId
       }
     });
   };
 
   // Callback function to update user attributes, organisations and shifts using updated sessionId
   callbackSessionId = (sessionId) => {
-    let promise1 = this.fetchUserAttributes(sessionId).then(response => {
-      response.json().then(json => {
-        this.setState({
-          userAttributes: json
-        });
-      });
-    });
+    let promise1 = this.fetchUserAttributes(sessionId)
+        .then(response => response.json())
+        .then(json => this.setState({
+            userAttributes: json
+        }));
     Promise.all([promise1]).then(() => {
-      let promise2 = this.getOrganisations(sessionId).then(response => {
-        response.json().then(json => {
-          this.setState({
-            organisations: json
-          });
+        let promise2 = this.getOrganisations(sessionId)
+            .then(response => response.json())
+            .then(json => this.setState({
+                organisations: json
+            }));
+        
+            console.log(sessionId);
+        let promise3 = this.getShifts(sessionId)
+            .then(response => response.json())
+            .then(json => this.setState({
+                shifts: json
+            }));
+        // this.setState({
+        //     sessionId: sessionId
+        // });
+        Promise.all([promise2, promise3]).then(() => {
+            this.setState({
+                sessionId: sessionId
+            });
         });
-      });
-      let promise3 = this.getShifts(sessionId).then(response => {
-        response.json().then(json => {
-          this.setState({
-            shifts: json
-          });
-        });
-      });
-      Promise.all([promise2, promise3]).then(() => {
-        this.setState({ sessionId: sessionId });
-      });
     });
-  };
+};
 
   // Get initial user attributes, organisations and shift data
-  fetchData = (sessionId) => {
-    let promise1 = this.fetchUserAttributes(this.state.sessionId).then(response => {
-      response.json().then(json => {
-        this.setState({
-          userAttributes: json
-        });
-      });
-    });
-
+  fetchData = () => {
+    let promise1 = this.fetchUserAttributes(this.state.sessionId)
+        .then(response => response.json())
+        .then(json => this.setState({
+            userAttributes: json
+        }));
     Promise.all([promise1]).then(() => {
-      let promise2 = this.getOrganisations(this.state.sessionId).then(
-        response => {
-          response.json().then(json => {
-            this.setState({
-              organisations: json
-            });
-          });
-        }
-      );
-      let promise3 = this.getShifts(this.state.sessionId).then(
-        response => {
-          response.json().then(json => {
-            this.setState({
-              shifts: json
-            });
-          });
-      });
-      Promise.all([promise2, promise3]).then(() => {
-        this.forceUpdate();
-      });
+        let promise2 = this.getOrganisations(this.state.sessionId)
+            .then(response => response.json())
+            .then(json => this.setState({
+                organisations: json
+            }));
+        let promise3 = this.getShifts(this.state.sessionId)
+            .then(response => response.json())
+            .then(json => this.setState({
+                shifts: json
+            }));
+        Promise.all([promise2, promise3]).then(() => {
+            this.forceUpdate();
+        });
     });
-  };
+};
 
   // Get list of organisations
   getOrganisations = (sessionId) => {
     return fetch("/organisations", {
       method: "GET",
       headers: {
-        Accept: "application/json",
+        "Accept": "application/json",
         "Content-Type": "application/json",
-        Authorization: sessionId
+        "Authorization": sessionId
       }
     });
   };
@@ -121,8 +112,9 @@ class App extends Component {
     return fetch("/shifts", {
       method: "GET",
       headers: {
+        "Accept": "application/json",
         "Content-Type": "application/json",
-        Authorization: sessionId
+        "Authorization": sessionId
       }
     });
   };

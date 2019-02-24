@@ -21,10 +21,10 @@ export class Signup extends Component {
       passwordConfirmation: this.state.passwordConfirmation
     };
 
-    fetch("http://localhost:3000/auth/signup/", {
+    fetch("/auth/signup/", {
       method: "POST",
       headers: {
-        Accept: "application/json",
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       body: JSON.stringify(data)

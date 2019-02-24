@@ -35,12 +35,12 @@ export class Organisations extends Component {
     var data = {
       organisationId: organisationId
     };
-    fetch("http://localhost:3000/organisations/join", {
+    fetch("/organisations/join", {
       method: "POST",
       headers: {
-        Accept: "application/json",
+        "Accept": "application/json",
         "Content-Type": "application/json",
-        Authorization: this.props.sessionId
+        "Authorization": this.props.sessionId
       },
       body: JSON.stringify(data)
     }).then( res => {
@@ -56,12 +56,12 @@ export class Organisations extends Component {
       hourlyRate: this.state.hourlyRate
     };
 
-    fetch("http://localhost:3000/organisations/create_join", {
+    fetch("/organisations/create_join", {
       method: "POST",
       headers: {
-        Accept: "application/json",
+        "Accept": "application/json",
         "Content-Type": "application/json",
-        Authorization: this.props.sessionId
+        "Authorization": this.props.sessionId
       },
       body: JSON.stringify(data)
     }).then(res=> {
@@ -73,12 +73,12 @@ export class Organisations extends Component {
   }
 
   leaveOrganisation = () => {
-    fetch("http://localhost:3000/organisations/leave", {
+    fetch("/organisations/leave", {
       method: "POST",
       headers: {
-        Accept: "application/json",
+        "Accept": "application/json",
         "Content-Type": "application/json",
-        Authorization: this.props.sessionId
+        "Authorization": this.props.sessionId
       }
     }).then( res => {
       this.props.getData(this.props.sessionId);
@@ -96,14 +96,14 @@ export class Organisations extends Component {
     };
 
     fetch(
-      "http://localhost:3000/organisations/" +
+      "/organisations/" +
         this.props.userAttributes.organisationId.toString(),
       {
         method: "PUT",
         headers: {
-          Accept: "application/json",
+          "Accept": "application/json",
           "Content-Type": "application/json",
-          Authorization: this.props.sessionId
+          "Authorization": this.props.sessionId
         },
         body: JSON.stringify(data)
       }

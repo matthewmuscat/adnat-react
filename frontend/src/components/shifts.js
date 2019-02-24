@@ -96,9 +96,9 @@ export class Shifts extends Component {
     fetch("/shifts/", {
       method: "POST",
       headers: {
-        Accept: "application/json",
+        "Accept": "application/json",
         "Content-Type": "application/json",
-        Authorization: this.props.sessionId
+        "Authorization": this.props.sessionId
       },
       body: JSON.stringify(data)
     })
@@ -121,9 +121,9 @@ export class Shifts extends Component {
     fetch("/shifts/" + this.props.shifts[i].id, {
       method: "DELETE",
       headers: {
-        Accept: "application/json",
+        "Accept": "application/json",
         "Content-Type": "application/json",
-        Authorization: this.props.sessionId
+        "Authorization": this.props.sessionId
       }
     })
       .then(res => {
