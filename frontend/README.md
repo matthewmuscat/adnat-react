@@ -21,20 +21,21 @@ Your solution should compile to a single HTML page, and a bundled JS file, you c
 2. `cd adnat-react`
 3. `npm install`
 4. `cd frontend`
-5. `npm install`
-6. `cd ../backend`
-7. `npm install`
+5. `yarn add -D serve`
+6. `npm install`
+7. `cd ../backend`
+8. `npm install`
 
 **Backend:** 
 
-8. Navigate to parent: `cd adnat-react`
-9. `yarn backend:setup`
-10. `yarn backend:start`
+9. Navigate to parent: `cd adnat-react`
+10. `yarn backend:setup`
+11. `yarn backend:start`
 
 **Frontend: (in new console)** 
 
-11. `cd adnat-react`
-12. `cd frontend`
-13. `npm run build`
-14. `npm run serve`
-15. Browse to http://localhost:5000
+12. `cd adnat-react`
+13. `cd frontend`
+14. `npm run build`
+15. `npm run serve`
+16. Browse to http://localhost:5000
