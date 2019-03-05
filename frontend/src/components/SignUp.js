@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { postApi, baseApiEndpoint } from "../utils/api";
 
 export class Signup extends Component {
   constructor(props) {
@@ -13,7 +14,6 @@ export class Signup extends Component {
 
   // Request signup
   signup = e => {
-    e.preventDefault();
     var data = {
       name: this.state.name,
       email: this.state.email,
@@ -21,14 +21,7 @@ export class Signup extends Component {
       passwordConfirmation: this.state.passwordConfirmation
     };
 
-    fetch("http://localhost:3000/auth/signup/", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    })
+    postApi("auth/signup/", "POST", this.props.sessionId, data)
       .then(response => {
         if (response.ok) {
           response.json().then(json => {
@@ -63,7 +56,7 @@ export class Signup extends Component {
           </div>
 
           <form
-            action="http://localhost:3000/auth/signup"
+            action={baseApiEndpoint + "/auth/signup"}
             method="post"
             onSubmit={this.signup}
           >

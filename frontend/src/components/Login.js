@@ -7,6 +7,7 @@ import {
   Redirect
 } from "react-router-dom";
 import SignUp from "./SignUp";
+import { postApi, baseApiEndpoint } from "../utils/api";
 
 export class Login extends Component {
   constructor(props) {
@@ -25,14 +26,7 @@ export class Login extends Component {
       password: this.state.password
     };
 
-    fetch("http://localhost:3000/auth/login/", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    })
+    postApi("auth/login/", "POST", this.props.sessionId, data)
       .then(response => {
         if (response.ok) {
           response.json().then(json => {
@@ -70,7 +64,7 @@ export class Login extends Component {
 
               <form
                 onSubmit={this.login}
-                action="http://localhost:3000/auth/login"
+                action={baseApiEndpoint}
                 method="post"
               >
                 <input

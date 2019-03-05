@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {
   BrowserRouter as Router,
   Route,
-  Link,
   Switch,
   Redirect
 } from "react-router-dom";
@@ -13,7 +12,7 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import Organisations from "./components/Organisations";
 import Shifts from "./components/Shifts";
-import { getApi } from "./utils/getApi";
+import { fetchUserAttributes, getShifts, getOrganisations } from "./utils/api";
 
 class App extends Component {
   constructor(props) {
@@ -38,15 +37,10 @@ class App extends Component {
     });
   };
 
-  // Get user attributes
-  fetchUserAttributes = sessionId => {
-    return getApi("users/me/", "GET", sessionId);
-  };
-
   // Callback function to update user attributes, organisations and shifts using updated sessionId
   callbackSessionId = sessionId => {
     // fetch user data
-    let promise1 = this.fetchUserAttributes(sessionId)
+    let promise1 = fetchUserAttributes(sessionId)
       .then(response => response.json())
       .then(json =>
         this.setState({
@@ -56,7 +50,7 @@ class App extends Component {
       );
 
     // fetch organisations (show when not logged in)
-    let promise2 = this.getOrganisations(sessionId)
+    let promise2 = getOrganisations(sessionId)
       .then(response => response.json())
       .then(json =>
         this.setState({
@@ -66,7 +60,7 @@ class App extends Component {
     Promise.all([promise1, promise2]).then(() => {
       // only get shifts if user has joined an organisation
       if (this.state.userAttributes.organisationId !== null) {
-        let promise3 = this.getShifts(sessionId)
+        let promise3 = getShifts(sessionId)
           .then(response => response.json())
           .then(json =>
             this.setState({
@@ -85,7 +79,7 @@ class App extends Component {
   // Get initial user attributes, organisations and shift data
   fetchData = () => {
     // fetch user data
-    let promise1 = this.fetchUserAttributes(this.state.sessionId)
+    let promise1 = fetchUserAttributes(this.state.sessionId)
       .then(response => response.json())
       .then(json =>
         this.setState({
@@ -94,7 +88,7 @@ class App extends Component {
       );
 
     // fetch organisations (show when not logged in)
-    let promise2 = this.getOrganisations(this.state.sessionId)
+    let promise2 = getOrganisations(this.state.sessionId)
       .then(response => response.json())
       .then(json =>
         this.setState({
@@ -105,7 +99,7 @@ class App extends Component {
     Promise.all([promise1, promise2]).then(() => {
       // only get shifts if user has joined an organisation
       if (this.state.userAttributes.organisationId !== null) {
-        let promise3 = this.getShifts(this.state.sessionId)
+        let promise3 = getShifts(this.state.sessionId)
           .then(response => response.json())
           .then(json =>
             this.setState({
@@ -117,16 +111,6 @@ class App extends Component {
         });
       }
     });
-  };
-
-  // Get list of organisations
-  getOrganisations = sessionId => {
-    return getApi("organisations", "GET", sessionId);
-  };
-
-  // Get list of shifts
-  getShifts = sessionId => {
-    return getApi("shifts", "GET", sessionId);
   };
 
   // Handle Sign Up / Login UI
@@ -197,7 +181,6 @@ class App extends Component {
             sessionId={this.state.sessionId}
             logout={this.logout}
             userAttributes={this.state.userAttributes}
-            getApi={getApi}
           />
           <div className="container">
             {/* If user is viewing shifts */}
@@ -231,7 +214,6 @@ class App extends Component {
                       userAttributes={this.state.userAttributes}
                       organisations={this.state.organisations}
                       getData={this.fetchData}
-                      getOrganisations={this.getOrganisations}
                       toggleShift={this.toggleShift}
                     />
                   )}

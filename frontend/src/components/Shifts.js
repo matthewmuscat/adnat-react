@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { postApi, getApi } from "../utils/api";
 
 export class Shifts extends Component {
   constructor(props) {
@@ -93,15 +94,7 @@ export class Shifts extends Component {
       data.breakLength = this.state.breakLength;
     }
 
-    fetch("http://localhost:3000/shifts/", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: this.props.sessionId
-      },
-      body: JSON.stringify(data)
-    })
+    postApi("/shifts", "POST", this.props.sessionId)
       .then(res => {
         this.props.getData(this.props.sessionId);
       })
@@ -118,14 +111,7 @@ export class Shifts extends Component {
 
   // Request to delete a shift
   deleteShift = i => {
-    fetch("http://localhost:3000/shifts/" + this.props.shifts[i].id, {
-      method: "DELETE",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: this.props.sessionId
-      }
-    })
+    getApi("shifts/" + this.props.shifts[i].id, "DELETE", this.props.sessionId)
       .then(res => {
         this.props.getData(this.props.sessionId);
       })

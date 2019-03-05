@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Shifts from "./Shifts";
+import { postApi, baseApiEndpoint } from "../utils/api";
 
 export class Organisations extends Component {
   constructor(props) {
@@ -34,17 +35,12 @@ export class Organisations extends Component {
     var data = {
       organisationId: organisationId
     };
-    fetch("http://localhost:3000/organisations/join", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: this.props.sessionId
-      },
-      body: JSON.stringify(data)
-    }).then(res => {
-      this.props.getData(this.props.sessionId);
-    });
+
+    postApi("organisations/join", "POST", this.props.sessionId, data).then(
+      res => {
+        this.props.getData(this.props.sessionId);
+      }
+    );
     this.setState({ organisationName: organisationName });
   };
 
@@ -55,15 +51,7 @@ export class Organisations extends Component {
       hourlyRate: this.state.hourlyRate
     };
 
-    fetch("http://localhost:3000/organisations/create_join", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: this.props.sessionId
-      },
-      body: JSON.stringify(data)
-    })
+    postApi("organisations/create_join", "POST", this.props.sessionId, data)
       .then(res => {
         this.props.getData(this.props.sessionId);
       })
@@ -73,14 +61,7 @@ export class Organisations extends Component {
   };
 
   leaveOrganisation = () => {
-    fetch("http://localhost:3000/organisations/leave", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: this.props.sessionId
-      }
-    }).then(res => {
+    postApi("organisations/leave", "POST", this.props.sessionId).then(res => {
       this.props.getData(this.props.sessionId);
     });
     this.setState({ editing: false });
@@ -93,18 +74,10 @@ export class Organisations extends Component {
       hourlyRate: this.state.hourlyRate
     };
 
-    fetch(
-      "http://localhost:3000/organisations/" +
-        this.props.userAttributes.organisationId.toString(),
-      {
-        method: "PUT",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: this.props.sessionId
-        },
-        body: JSON.stringify(data)
-      }
+    postApi(
+      "organisations/" + this.props.userAttributes.organisationId.toString(),
+      this.props.sessionId,
+      data
     )
       .then(res => {
         this.props.getData(this.props.sessionId);
@@ -143,7 +116,7 @@ export class Organisations extends Component {
           {this.displayOrganisations()}
 
           <form
-            action="http://localhost:3000/organisations/create_join"
+            action={baseApiEndpoint + "/organisations/create_join"}
             method="post"
             onSubmit={this.createOrganisation}
           >
@@ -181,7 +154,8 @@ export class Organisations extends Component {
               <h2>Edit {this.state.organisationName}</h2>
               <form
                 action={
-                  "http://localhost:3000/organisations/" +
+                  baseApiEndpoint +
+                  "/organisations/" +
                   this.state.organisationId
                 }
                 method="PUT"
