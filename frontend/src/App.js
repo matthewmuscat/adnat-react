@@ -29,21 +29,33 @@ class App extends Component {
     };
   }
 
-  // Logout state handler function
-  logout = () => {
-    this.setState({ sessionId: undefined, showShifts: false });
-  };
-
-  // Get user attributes
-  fetchUserAttributes = sessionId => {
-    return fetch("http://localhost:3000/users/me/", {
-      method: "GET",
+  // get helper function
+  fetchRequest = (fetchURL, method, sessionId) => {
+    return fetch(fetchURL, {
+      method: method,
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
         Authorization: sessionId
       }
     });
+  };
+
+  // Logout state handler function
+  logout = () => {
+    this.setState({
+      sessionId: undefined,
+      showShifts: false
+    });
+  };
+
+  // Get user attributes
+  fetchUserAttributes = sessionId => {
+    return this.fetchRequest(
+      "http://localhost:3000/users/me/",
+      "GET",
+      sessionId
+    );
   };
 
   // Callback function to update user attributes, organisations and shifts using updated sessionId
@@ -124,26 +136,16 @@ class App extends Component {
 
   // Get list of organisations
   getOrganisations = sessionId => {
-    return fetch("http://localhost:3000/organisations", {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: sessionId
-      }
-    });
+    return this.fetchRequest(
+      "http://localhost:3000/organisations",
+      "GET",
+      sessionId
+    );
   };
 
   // Get list of shifts
   getShifts = sessionId => {
-    return fetch("http://localhost:3000/shifts", {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: sessionId
-      }
-    });
+    return this.fetchRequest("http://localhost:3000/shifts", "GET", sessionId);
   };
 
   // Handle Sign Up / Login UI
@@ -214,6 +216,7 @@ class App extends Component {
             sessionId={this.state.sessionId}
             logout={this.logout}
             userAttributes={this.state.userAttributes}
+            fetchRequest={this.fetchRequest}
           />
           <div className="container">
             {/* If user is viewing shifts */}
