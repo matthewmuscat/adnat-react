@@ -13,6 +13,7 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import Organisations from "./components/Organisations";
 import Shifts from "./components/Shifts";
+import { getApi } from "./utils/getApi";
 
 class App extends Component {
   constructor(props) {
@@ -29,18 +30,6 @@ class App extends Component {
     };
   }
 
-  // get helper function
-  getApi = (endpoint, method, sessionId) => {
-    return fetch("http://localhost:3000/" + endpoint, {
-      method: method,
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: sessionId
-      }
-    });
-  };
-
   // Logout state handler function
   logout = () => {
     this.setState({
@@ -51,7 +40,7 @@ class App extends Component {
 
   // Get user attributes
   fetchUserAttributes = sessionId => {
-    return this.getApi("users/me/", "GET", sessionId);
+    return getApi("users/me/", "GET", sessionId);
   };
 
   // Callback function to update user attributes, organisations and shifts using updated sessionId
@@ -132,12 +121,12 @@ class App extends Component {
 
   // Get list of organisations
   getOrganisations = sessionId => {
-    return this.getApi("organisations", "GET", sessionId);
+    return getApi("organisations", "GET", sessionId);
   };
 
   // Get list of shifts
   getShifts = sessionId => {
-    return this.getApi("shifts", "GET", sessionId);
+    return getApi("shifts", "GET", sessionId);
   };
 
   // Handle Sign Up / Login UI
@@ -208,7 +197,7 @@ class App extends Component {
             sessionId={this.state.sessionId}
             logout={this.logout}
             userAttributes={this.state.userAttributes}
-            getApi={this.getApi}
+            getApi={getApi}
           />
           <div className="container">
             {/* If user is viewing shifts */}
