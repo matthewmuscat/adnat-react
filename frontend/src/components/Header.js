@@ -5,11 +5,7 @@ export class Header extends Component {
   // Logout call, then request state change
   logout = () => {
     this.props
-      .fetchRequest(
-        "http://localhost:3000/auth/logout",
-        "DELETE",
-        this.props.sessionId
-      )
+      .fetchRequest("auth/logout", "DELETE", this.props.sessionId)
       .then(() => {
         this.props.logout();
       });

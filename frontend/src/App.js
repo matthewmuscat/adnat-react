@@ -30,8 +30,8 @@ class App extends Component {
   }
 
   // get helper function
-  fetchRequest = (fetchURL, method, sessionId) => {
-    return fetch(fetchURL, {
+  getApi = (endpoint, method, sessionId) => {
+    return fetch("http://localhost:3000/" + endpoint, {
       method: method,
       headers: {
         Accept: "application/json",
@@ -51,11 +51,7 @@ class App extends Component {
 
   // Get user attributes
   fetchUserAttributes = sessionId => {
-    return this.fetchRequest(
-      "http://localhost:3000/users/me/",
-      "GET",
-      sessionId
-    );
+    return this.getApi("users/me/", "GET", sessionId);
   };
 
   // Callback function to update user attributes, organisations and shifts using updated sessionId
@@ -136,16 +132,12 @@ class App extends Component {
 
   // Get list of organisations
   getOrganisations = sessionId => {
-    return this.fetchRequest(
-      "http://localhost:3000/organisations",
-      "GET",
-      sessionId
-    );
+    return this.getApi("organisations", "GET", sessionId);
   };
 
   // Get list of shifts
   getShifts = sessionId => {
-    return this.fetchRequest("http://localhost:3000/shifts", "GET", sessionId);
+    return this.getApi("shifts", "GET", sessionId);
   };
 
   // Handle Sign Up / Login UI
@@ -216,7 +208,7 @@ class App extends Component {
             sessionId={this.state.sessionId}
             logout={this.logout}
             userAttributes={this.state.userAttributes}
-            fetchRequest={this.fetchRequest}
+            getApi={this.getApi}
           />
           <div className="container">
             {/* If user is viewing shifts */}
